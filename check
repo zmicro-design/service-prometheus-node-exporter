@@ -10,7 +10,7 @@ check() {
     cat $SERVICE_CONFIG
   fi
 
-  service::config_set SERVICE_PROMETHEUS_NODE_EXPORTER_PORT text "Port" 9100
+  # service::config_set SERVICE_PROMETHEUS_NODE_EXPORTER_PORT text "Port" 9100
 }
 
 check $@
