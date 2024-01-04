@@ -1,0 +1,20 @@
+services:
+  prometheus-node-exporter:
+    restart: always
+    image: whatwewant/prometheus-node-exporter:${SERVICE_PROMETHEUS_NODE_EXPORTER_IMAGE_VERSION}
+    ports:
+      - 0.0.0.0:${SERVICE_PROMETHEUS_NODE_EXPORTER_PORT}:9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress
